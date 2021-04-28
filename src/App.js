@@ -2,7 +2,7 @@ import "@elastic/eui/dist/eui_theme_light.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import {Alert, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {Redirect, Route, Switch} from "react-router-dom";
 import React, {useState} from "react";
 import {
@@ -16,19 +16,7 @@ import {
     TripStopsViewer,
     TripViewer,
 } from "./components";
-import {ErrorBoundary} from "react-error-boundary";
-
-function ErrorFallback({error, resetErrorBoundary}) {
-    return <Alert variant={"danger"}>
-        <Alert.Heading>Error</Alert.Heading>
-        <p>
-            An error occurred: <pre>{error.message}</pre>
-        </p>
-        <Alert.Link onClick={() => {
-            resetErrorBoundary()
-        }}>Reset</Alert.Link>
-    </Alert>;
-}
+import {EuiErrorBoundary} from "@elastic/eui";
 
 function App() {
     const [rtif, setRtif] = useState(new Map());
@@ -39,8 +27,7 @@ function App() {
         <AppNavigation isLoaded={isLoaded}/>
         <Row className="flex-grow-1 overflow-hidden" style={{"marginBottom": "10px"}}>
             <Col className="mh-100">
-                <ErrorBoundary
-                    fallbackRender={ErrorFallback}>
+                <EuiErrorBoundary>
                     <Switch>
                         <Route exact path="/" render={routeProps => (
                             <LandingPage rtif={rtif} setRtif={setRtif} {...routeProps} />
@@ -74,7 +61,7 @@ function App() {
                             <Redirect to="/"/>
                         </Route>
                     </Switch>
-                </ErrorBoundary>
+                </EuiErrorBoundary>
             </Col>
         </Row>
         {/*            <Row className="flex-shrink-0 bg-light">
