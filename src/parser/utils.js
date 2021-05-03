@@ -50,7 +50,7 @@ export function formatTime(rtifTime) {
             const fractionalMinutes = (fractionalHours - hours) * 60;
             const minutes = Math.trunc(fractionalMinutes);
 
-        const seconds = (fractionalMinutes - minutes) * 60;
+            const seconds = (fractionalMinutes - minutes) * 60;
 
             return hours.toString().padStart(2, "0") + minutes.toString().padStart(2, "0") + ((seconds === 30) ? "+" : "");
         } else {
