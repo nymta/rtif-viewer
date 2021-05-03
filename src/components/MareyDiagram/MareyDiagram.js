@@ -24,12 +24,11 @@ Plotly.d3.locale = (locale) => {
     return result;
 }
 
-function applicabilityShapesForDirection(theRtif, direction, sortedStopList, namer) {
+function buildApplicabilityShapes(theRtif, sortedStopList, namer) {
     return theRtif
         .get("applicability")
         .get("periods")
         .filter(applicability => _.includes(sortedStopList, namer(applicability.get("locationName"))))
-        .filter(applicability => applicability.get("direction") === direction)
         .map(applicability => {
             const yIndex = _.indexOf(sortedStopList, namer(applicability.get("locationName")));
 
@@ -43,7 +42,44 @@ function applicabilityShapesForDirection(theRtif, direction, sortedStopList, nam
                 x1: applicability.get("endingTime"),
                 y1: yIndex,
                 opacity: 0.5,
-                line: {color: "gray", dash: "solid", width: 5},
+                line: {
+                    color: "gray",
+                    dash: "solid",
+                    width: 5,
+                },
+                meta: {
+                    direction: applicability.get("direction"),
+                },
+            }
+        });
+}
+
+function tripHasRelief(trip) {
+    return trip.get("reliefWorkProgramId") != null
+        && trip.get("reliefRunNumber") != null
+        && trip.get("reliefLocation") != null
+        && trip.get("reliefDepartureTime") != null;
+}
+
+function buildReliefAnnotations(revenueTrips, sortedStopList, namer) {
+    return revenueTrips
+        .filter(theTrip => tripHasRelief(theTrip))
+        .map(theTrip => {
+            const yIndex = _.indexOf(sortedStopList, namer(theTrip.get("reliefLocation")));
+
+            return {
+                text: theTrip.get("reliefRunNumber"),
+                hovertext: `${theTrip.get("tripName")} relieved by ${theTrip.get("reliefWorkProgramId")} run ${theTrip.get("reliefRunNumber")}`,
+                xref: "x",
+                yref: "y",
+                x: theTrip.get("reliefDepartureTime"),
+                y: yIndex,
+                ax: -30,
+                ay: -30,
+                textangle: 45,
+                meta: {
+                    direction: theTrip.get("direction"),
+                },
             }
         });
 }
@@ -57,17 +93,17 @@ function colorForTrip(trip, theRtif) {
 function MareyDiagram({rtif: theRtif}) {
     const geographies = theRtif.get("geography");
 
-    const counts = _.countBy(Array.from(geographies.values()), stop => {return formatLocation(stop.get("locationName"), geographies);});
+    const counts = _.countBy(Array.from(geographies.values()), stop => formatLocation(stop.get("locationName"), geographies));
 
     function namer(stop) {
-        return formatLocation(stop, geographies) + (counts[formatLocation(stop, geographies)] > 1 ?  ` (${stop})` : "");
+        return formatLocation(stop, geographies) + (counts[formatLocation(stop, geographies)] > 1 ? ` (${stop})` : "");
     }
 
     const sortedStopList = _.reverse(
         buildSortedStopList(theRtif)
-        .map(location => {
-            return namer(location);
-        })
+            .map(location => {
+                return namer(location);
+            }),
     );
 
     const revenueTrips = _.sortBy(
@@ -83,22 +119,43 @@ function MareyDiagram({rtif: theRtif}) {
                     type: "scattergl",
                     mode: "lines+markers",
                     name: trip.get("tripName"),
-                    line: {color: colorForTrip(trip, theRtif)},
+                    line: {
+                        color: colorForTrip(trip, theRtif),
+                    },
                     x: tripEvents.map(event => event.get("eventTime")), //times
                     y: tripEvents.map(event => namer(event.get("location"))), //stops
-                    //legendgroup: trip.get("path")
+                    meta: {
+                        direction: trip.get("direction"),
+                    },
                 };
             },
         );
 
-    const seriesDirections = revenueTrips.map(trip => trip.get("direction"));
+    const applicabilityShapes = buildApplicabilityShapes(theRtif, sortedStopList, namer);
 
-    function seriesVisibility(directions) {
-        return seriesDirections.map(e => _.includes(directions, e));
+    const reliefAnnotations = buildReliefAnnotations(revenueTrips, sortedStopList, namer);
+
+    function filterSeriesVisibility(entities, states) {
+        const values = [];
+        const indices = [];
+
+        entities.forEach((entity, index) => {
+            const entityDirection = entity.meta.direction;
+
+            if (entityDirection in states) {
+                values.push(states[entityDirection]);
+                indices.push(index);
+
+            }
+        });
+
+        return [values, indices];
     }
 
-    const northboundApplicabilityShapes = applicabilityShapesForDirection(theRtif, "N", sortedStopList, namer);
-    const southboundApplicabilityShapes = applicabilityShapesForDirection(theRtif, "S", sortedStopList, namer);
+    function buildSeriesVisibility(states) {
+        const [values, indices] = filterSeriesVisibility(data, states);
+        return [{visible: values}, {}, indices];
+    }
 
     const layout = {
         autosize: true,
@@ -114,10 +171,11 @@ function MareyDiagram({rtif: theRtif}) {
             type: "category",
             categoryorder: "array",
             categoryarray: sortedStopList,
-            automargin: true
+            automargin: true,
         },
         margin: {t: 20, l: 20, b: 20, r: 20},
         shapes: [],
+        annotations: reliefAnnotations,
         updatemenus: [
             {
                 type: "dropdown",
@@ -128,49 +186,79 @@ function MareyDiagram({rtif: theRtif}) {
                     {
                         method: "update",
                         label: "All Trips",
-                        args: [{visible: seriesVisibility(["N", "S"])}],
+                        args: buildSeriesVisibility({"N": true, "S": true}),
                     },
                     {
                         method: "update",
                         label: "Northbound Trips",
-                        args: [{visible: seriesVisibility(["N"])}],
+                        args: buildSeriesVisibility({"N": true, "S": false}),
 
                     },
                     {
                         method: "update",
                         label: "Southbound Trips",
-                        args: [{visible: seriesVisibility(["S"])}],
+                        args: buildSeriesVisibility({"N": false, "S": true}),
 
                     },
                     {
                         method: "update",
                         label: "No Trips",
-                        args: [{visible: seriesVisibility([])}],
+                        args: buildSeriesVisibility({"N": false, "S": false}),
                     },
                 ],
             },
             {
                 type: "dropdown",
                 direction: "down",
-                x: 0.3,
+                x: 0.25,
+                y: 1.1,
+                active: 0,
+                buttons: [
+                    {
+                        method: "update",
+                        label: "All Relief",
+                        args: [{}, {annotations: reliefAnnotations}],
+
+                    },
+                    {
+                        method: "update",
+                        label: "Northbound Relief",
+                        args: [{}, {annotations: reliefAnnotations.filter(annotation => annotation.meta.direction === "N")}],
+                    },
+                    {
+                        method: "update",
+                        label: "Southbound Relief",
+                        args: [{}, {annotations: reliefAnnotations.filter(annotation => annotation.meta.direction === "S")}],
+                    },
+                    {
+                        method: "update",
+                        label: "No Relief",
+                        args: [{}, {annotations: []}],
+                    },
+                ],
+            },
+            {
+                type: "dropdown",
+                direction: "down",
+                x: 0.43,
                 y: 1.1,
                 active: 3,
                 buttons: [
                     {
                         method: "update",
                         label: "All Applicability",
-                        args: [{}, {shapes: [...northboundApplicabilityShapes, ...southboundApplicabilityShapes]}],
+                        args: [{}, {shapes: applicabilityShapes}],
 
                     },
                     {
                         method: "update",
                         label: "Northbound Applicability",
-                        args: [{}, {shapes: northboundApplicabilityShapes}],
+                        args: [{}, {shapes: applicabilityShapes.filter(shape => shape.meta.direction === "N")}],
                     },
                     {
                         method: "update",
                         label: "Southbound Applicability",
-                        args: [{}, {shapes: southboundApplicabilityShapes}],
+                        args: [{}, {shapes: applicabilityShapes.filter(shape => shape.meta.direction === "S")}],
                     },
                     {
                         method: "update",
@@ -179,6 +267,7 @@ function MareyDiagram({rtif: theRtif}) {
                     },
                 ],
             },
+
         ],
     };
 
