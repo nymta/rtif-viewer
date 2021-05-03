@@ -13,14 +13,29 @@ export function formatTimetableName(timetable) {
     return `${timetable.get("lineIdentifier")}-${timetable.get("serviceCode").toString()}${timetable.get("fileNumber").toString().padStart(3, "0")} S-${timetable.get("supplementNumber").toString().padStart(3, "0")}`;
 }
 
+function formatLocationAbbreviation(location, tripType) {
+    if (!!location) {
+        return rtifLocationtoAtsAbbreviation.get(location);
+    } else {
+        switch (tripType) {
+            case 2:
+                return "PUT";
+            case 3:
+                return "LAY";
+            default:
+                return "UNK";
+        }
+    }
+}
+
 export function formatTripName(trip, timetable) {
     const atsTripType = tripTypesToAts.get(trip.get("tripType"));
     const lineName = trip.get("tripLine") || timetable.get("lineIdentifier")
 
     const originTime = formatTime(trip.get("originTime"));
 
-    const originTerminal = rtifLocationtoAtsAbbreviation.get(trip.get("originLocation"));
-    const destinationTerminal = rtifLocationtoAtsAbbreviation.get(trip.get("destinationLocation"));
+    const originTerminal = formatLocationAbbreviation(trip.get("originLocation"), trip.get("tripType"));
+    const destinationTerminal = formatLocationAbbreviation(trip.get("destinationLocation"), trip.get("tripType"));
 
     return `${atsTripType}${lineName} ${originTime} ${originTerminal}/${destinationTerminal}`;
 }
