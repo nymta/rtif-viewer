@@ -40,16 +40,24 @@ export function formatTripName(trip, timetable) {
     return `${atsTripType}${lineName} ${originTime} ${originTerminal}/${destinationTerminal}`;
 }
 
+const DAY_IN_CENTIMINUTES = 100 * 60 * 24;
+
 export function formatTime(rtifTime) {
     if (!!rtifTime) {
-        const fractionalHours = Math.abs(rtifTime / 100 / 60);
-        const hours = Math.trunc(fractionalHours);
-        const fractionalMinutes = (fractionalHours - hours) * 60;
-        const minutes = Math.trunc(fractionalMinutes);
+        if (rtifTime >= 0) {
+            const fractionalHours = rtifTime / 100 / 60;
+            const hours = Math.trunc(fractionalHours);
+            const fractionalMinutes = (fractionalHours - hours) * 60;
+            const minutes = Math.trunc(fractionalMinutes);
 
         const seconds = (fractionalMinutes - minutes) * 60;
 
-        return ((Math.sign(rtifTime) === -1) ? "-" : "") + hours.toString().padStart(2, "0") + minutes.toString().padStart(2, "0") + ((seconds === 30) ? "+" : "");
+            return hours.toString().padStart(2, "0") + minutes.toString().padStart(2, "0") + ((seconds === 30) ? "+" : "");
+        } else {
+            const offsetTime = DAY_IN_CENTIMINUTES - (Math.abs(rtifTime) % DAY_IN_CENTIMINUTES);
+
+            return `[${formatTime(offsetTime)}]`;
+        }
 
     } else {
         return "";
