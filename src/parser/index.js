@@ -1,6 +1,25 @@
 import parseRtif from "./parser";
-import {formatTimetableName, formatTime, formatLocation, formatDirection, formatTripType, formatEventType,
-    formatTimepointFlag, formatCrewing, formatStopFlag} from "./utils";
+import {
+  formatTimetableName,
+  formatTime,
+  formatLocation,
+  formatDirection,
+  formatTripType,
+  formatEventType,
+  formatTimepointFlag,
+  formatCrewing,
+  formatStopFlag,
+} from "./utils";
 
-export {parseRtif, formatTimetableName, formatTime, formatLocation, formatDirection, formatTripType, formatEventType,
-    formatTimepointFlag, formatCrewing, formatStopFlag};
+export {
+  parseRtif,
+  formatTimetableName,
+  formatTime,
+  formatLocation,
+  formatDirection,
+  formatTripType,
+  formatEventType,
+  formatTimepointFlag,
+  formatCrewing,
+  formatStopFlag,
+};

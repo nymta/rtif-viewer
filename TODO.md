@@ -1,27 +1,27 @@
-TODO
-====
- 
-* Table searching/filtering
+# TODO
 
-* Marey diagram
-    * Click on line -> detail view?
+- Table searching/filtering
 
-* Timetable view
+- Marey diagram
 
-* Validation of control layer counts
+  - Click on line -> detail view?
 
-* TypeScript?
+- Timetable view
 
-* Better line reader
+- Validation of control layer counts
 
-* react-helmet
+- TypeScript?
 
-* Meaningful tests
+- Better line reader
 
-* Fix router complaint
+- react-helmet
+
+- Meaningful tests
+
+- Fix router complaint
 
 Stretch goals:
 
-* Supplement layering
+- Supplement layering
 
-* Multiple bases (for trunks)
+- Multiple bases (for trunks)

@@ -9,13 +9,13 @@ import TripStopsViewer from "./TripStopsViewer";
 import TripViewer from "./TripViewer";
 
 export {
-    ApplicabilityViewer,
-    AppNavigation,
-    GeographyMap,
-    GeographyViewer,
-    LandingPage,
-    MareyDiagram,
-    StopGraph,
-    TripStopsViewer,
-    TripViewer,
+  ApplicabilityViewer,
+  AppNavigation,
+  GeographyMap,
+  GeographyViewer,
+  LandingPage,
+  MareyDiagram,
+  StopGraph,
+  TripStopsViewer,
+  TripViewer,
 };

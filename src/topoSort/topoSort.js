@@ -1,12 +1,14 @@
 import toposort from "toposort";
 
 function topoSort() {
-    const eles = this;
+  const eles = this;
 
-    const nodes = eles.nodes().map(node => node.id());
-    const edges = eles.edges().map(edge => [edge.source().id(), edge.target().id()]);
+  const nodes = eles.nodes().map((node) => node.id());
+  const edges = eles
+    .edges()
+    .map((edge) => [edge.source().id(), edge.target().id()]);
 
-    return toposort.array(nodes, edges);
+  return toposort.array(nodes, edges);
 }
 
 export default topoSort;

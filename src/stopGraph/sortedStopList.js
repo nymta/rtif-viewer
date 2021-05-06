@@ -6,12 +6,12 @@ import topoSort from "../topoSort";
 Cytoscape.use(topoSort);
 
 function buildSortedStopList(theRtif) {
-    const cy = Cytoscape({
-        elements: buildStopGraph(theRtif),
-        headless: true,
-    });
+  const cy = Cytoscape({
+    elements: buildStopGraph(theRtif),
+    headless: true,
+  });
 
-    return cy.elements().topoSort();
+  return cy.elements().topoSort();
 }
 
 export default buildSortedStopList;
