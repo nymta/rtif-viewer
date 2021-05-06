@@ -16,8 +16,6 @@ TODO
 
 * react-helmet
 
-* Formatting of negative times
-
 * Meaningful tests
 
 * Fix router complaint

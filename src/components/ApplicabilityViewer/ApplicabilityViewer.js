@@ -1,7 +1,6 @@
 import React from "react";
-import {Col, Row} from "react-bootstrap";
 import DataTable from "../DataTable";
-import {EuiEmptyPrompt} from "@elastic/eui";
+import {EuiEmptyPrompt, EuiFlexGroup, EuiFlexItem, EuiPageTemplate, EuiPanel} from "@elastic/eui";
 
 const columns = [
     {
@@ -29,34 +28,39 @@ const columns = [
 function ApplicabilityViewer({rtif: theRtif}) {
     const applicability = theRtif.get("applicability");
 
-    return <Row className={"flex-grow-1 h-100 mh-100"}>
-        <Col className={"h-100 mh-100"}>
-            {
-             applicability.get("allDay")
-                 ?
-                     <EuiEmptyPrompt
-                         iconType="calendar"
-                         title={<h2>All-day timetable</h2>}
-                         body={
-                                 <p>
-                                     This is an all-day timetable and has no applicability records.
-                                 </p>
-                         }
-                     />
-                 : <DataTable
-                     columns={columns}
-                     dataRows={applicability.get("periods")}
-                     renderContext={theRtif}
-                     initialSort={[
-                         {id: 'direction', direction: 'asc'},
-                         {id: 'startingTime', direction: 'asc'}
-                     ]}
-                 />
-            }
-
-
-        </Col>
-    </Row>;
+    return <EuiPageTemplate
+        grow={true}
+        direction={"row"}
+        paddingSize={"s"}
+        restrictWidth={applicability.get("allDay")}>
+        <EuiFlexGroup direction="column" gutterSize={"none"}>
+            <EuiFlexItem>
+                {
+                    applicability.get("allDay")
+                        ? <EuiPanel>
+                            <EuiEmptyPrompt
+                                iconType="calendar"
+                                title={<h2>All-day timetable</h2>}
+                                body={
+                                    <p>
+                                        This is an all-day timetable and has no applicability records.
+                                    </p>
+                                }
+                            />
+                        </EuiPanel>
+                        : <DataTable
+                            columns={columns}
+                            dataRows={applicability.get("periods")}
+                            renderContext={theRtif}
+                            initialSort={[
+                                {id: "direction", direction: "asc"},
+                                {id: "startingTime", direction: "asc"},
+                            ]}
+                        />
+                }
+            </EuiFlexItem>
+        </EuiFlexGroup>
+    </EuiPageTemplate>;
 }
 
 export default ApplicabilityViewer;

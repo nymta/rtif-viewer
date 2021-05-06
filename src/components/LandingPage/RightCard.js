@@ -1,43 +1,40 @@
-import {Button, Card, Form} from "react-bootstrap";
 import {parseRtif} from "../../parser";
-import React, {useEffect} from "react";
-import bsCustomFileInput from "bs-custom-file-input";
+import React from "react";
 import {readAsText} from "promise-file-reader";
+import {EuiButton, EuiCard, EuiFilePicker, EuiForm, EuiFormRow, EuiSpacer} from "@elastic/eui";
 
 function RightCard({rtif: theRtif, setRtif}) {
-    useEffect(() => {
-        bsCustomFileInput.init()
-    }, []);
+    const filePickerRef = React.createRef();
 
     function onSubmit(event) {
         event.preventDefault();
-        const formData = new FormData(event.target);
+        const theForm = event.target;
+
+        const formData = new FormData(theForm);
         const theFile = formData.get("rtifFile");
+
+        const filePicker = filePickerRef.current;
 
         readAsText(theFile)
             .then(fileContents => {
                 const parsedRtif = parseRtif(fileContents);
                 setRtif(parsedRtif);
+                theForm.reset();
+                filePicker.setState({ promptText: null });
             })
     }
 
-    return <Card>
-        <Card.Header>Load Timetable</Card.Header>
-        <Card.Body>
-            <Form onSubmit={onSubmit}>
-                <Form.Group>
-                    <Form.File
-                        name={"rtifFile"}
-                        label="Select timetable"
-                        required
-                        custom />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
-        </Card.Body>
-    </Card>;
+    return <EuiCard title={"Load Timetable"} padding={"l"}>
+        <EuiForm className={"eui-textLeft"} component="form" onSubmit={onSubmit}>
+            <EuiFormRow label="RTIF file">
+                <EuiFilePicker required name={"rtifFile"} ref={filePickerRef} />
+            </EuiFormRow>
+            <EuiSpacer/>
+            <EuiButton type="submit" fill>
+                Load
+            </EuiButton>
+        </EuiForm>
+    </EuiCard>;
 
 }
 

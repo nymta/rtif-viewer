@@ -1,4 +1,3 @@
-import {Col, Row} from "react-bootstrap";
 import React from "react";
 import Plot from "react-plotly.js";
 import {buildSortedStopList} from "../../stopGraph";
@@ -6,6 +5,7 @@ import _ from "lodash";
 import Plotly from "plotly.js/dist/plotly";
 import {formatLocation, formatTime, formatTimetableName} from "../../parser";
 import {routeColors} from "../../parser/constants";
+import {EuiFlexGroup, EuiFlexItem, EuiPageTemplate} from "@elastic/eui";
 
 
 //This is awful and ugly and also unavoidable: https://github.com/plotly/plotly.js/issues/1464
@@ -57,17 +57,19 @@ function colorForTrip(trip, theRtif) {
 function MareyDiagram({rtif: theRtif}) {
     const geographies = theRtif.get("geography");
 
-    const counts = _.countBy(Array.from(geographies.values()), stop => {return formatLocation(stop.get("locationName"), geographies);});
+    const counts = _.countBy(Array.from(geographies.values()), stop => {
+        return formatLocation(stop.get("locationName"), geographies);
+    });
 
     function namer(stop) {
-        return formatLocation(stop, geographies) + (counts[formatLocation(stop, geographies)] > 1 ?  ` (${stop})` : "");
+        return formatLocation(stop, geographies) + (counts[formatLocation(stop, geographies)] > 1 ? ` (${stop})` : "");
     }
 
     const sortedStopList = _.reverse(
         buildSortedStopList(theRtif)
-        .map(location => {
-            return namer(location);
-        })
+            .map(location => {
+                return namer(location);
+            }),
     );
 
     const revenueTrips = _.sortBy(
@@ -114,9 +116,12 @@ function MareyDiagram({rtif: theRtif}) {
             type: "category",
             categoryorder: "array",
             categoryarray: sortedStopList,
-            automargin: true
+            automargin: true,
         },
         margin: {t: 20, l: 20, b: 20, r: 20},
+        font: {
+            family: "\"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+        },
         shapes: [],
         updatemenus: [
             {
@@ -182,17 +187,23 @@ function MareyDiagram({rtif: theRtif}) {
         ],
     };
 
-    return <Row className={"flex-grow-1 h-100 mh-100"}>
-        <Col className={"h-100 mh-100"}>
-            <Plot
-                data={data}
-                layout={layout}
-                config={{responsive: true, scrollZoom: true}}
-                style={{height: "100%", width: "100%"}}
-                useresizehandler={true}
-            />
-        </Col>
-    </Row>;
+    return <EuiPageTemplate
+        grow={true}
+        direction={"row"}
+        paddingSize={"s"}
+        restrictWidth={false}>
+        <EuiFlexGroup direction="column" gutterSize={"none"}>
+            <EuiFlexItem>
+                <Plot
+                    data={data}
+                    layout={layout}
+                    config={{responsive: true, scrollZoom: true}}
+                    style={{height: "100%", width: "100%"}}
+                    useresizehandler={true}
+                />
+            </EuiFlexItem>
+        </EuiFlexGroup>
+    </EuiPageTemplate>;
 }
 
 export default MareyDiagram;

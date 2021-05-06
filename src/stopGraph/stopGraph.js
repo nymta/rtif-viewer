@@ -22,12 +22,10 @@ function buildStopGraph(theRtif) {
 
     const allNodes = _.uniq(_.flatten(allEdges));
 
-    const cyInput = _.concat(
+    return _.concat(
         allNodes.map(node => ({data: {id: node, label: geographies.get(node).get("shortName")}})),
         allEdges.map(([from, to]) => ({data: {source: from, target: to}})),
     );
-
-    return cyInput;
 }
 
 export default buildStopGraph;

@@ -22,7 +22,7 @@ function doSort(data, columnsById, sortOrder, renderContext) {
     });
 }
 
-function DataTable({columns, dataRows, renderContext, initialSort=[]}) {
+function DataTable({columns, dataRows, renderContext, initialSort = []}) {
     const columnsById = useMemo(() => {
         return columns
             .reduce((map, element) => {
@@ -44,7 +44,7 @@ function DataTable({columns, dataRows, renderContext, initialSort=[]}) {
 
     const [visibleColumns, setVisibleColumns] = useState(() => {
             return columns
-                .filter(column => _.get(column, 'defaultDisplay', true))
+                .filter(column => _.get(column, "defaultDisplay", true))
                 .map(({id}) => id)
         },
     );
@@ -72,15 +72,15 @@ function DataTable({columns, dataRows, renderContext, initialSort=[]}) {
         };
     }, [sortedData, columnsById, renderContext]);
 
-    return  <EuiDataGrid
-            //className={className}
-            columns={columns}
-            columnVisibility={{visibleColumns, setVisibleColumns}}
-            rowCount={dataRows.length}
-            renderCellValue={renderCellValue}
-            sorting={{columns: sortingColumns, onSort: setSorting}}
-            schemaDetectors={Array.from(schemaDetectorsByType.values())}
-        />;
+    return <EuiDataGrid
+        height={"100%"}
+        columns={columns}
+        columnVisibility={{visibleColumns, setVisibleColumns}}
+        rowCount={dataRows.length}
+        renderCellValue={renderCellValue}
+        sorting={{columns: sortingColumns, onSort: setSorting}}
+        schemaDetectors={Array.from(schemaDetectorsByType.values())}
+    />;
 }
 
 export default DataTable;

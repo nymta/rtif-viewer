@@ -1,6 +1,6 @@
 import React from "react";
-import {Col, Row} from "react-bootstrap";
 import DataTable from "../DataTable";
+import {EuiFlexGroup, EuiFlexItem, EuiPageTemplate} from "@elastic/eui";
 
 const columns = [
     {
@@ -32,31 +32,37 @@ const columns = [
         id: "latitude",
         displayAsText: "Latitude",
         schema: "numeric",
-        defaultDisplay: false
+        defaultDisplay: false,
     },
     {
         id: "longitude",
         displayAsText: "Longitude",
         schema: "numeric",
-        defaultDisplay: false
+        defaultDisplay: false,
     },
 ];
 
 function GeographyViewer({rtif: theRtif}) {
     const geographies = Array.from(theRtif.get("geography").values());
 
-    return <Row className={"flex-grow-1 h-100 mh-100"}>
-        <Col className={"h-100 mh-100"}>
-            <DataTable
-                columns={columns}
-                dataRows={geographies}
-                renderContext={theRtif}
-                initialSort={[
-                    {id: 'locationName', direction: 'asc'},
-                ]}
-            />
-        </Col>
-    </Row>;
+    return <EuiPageTemplate
+        grow={true}
+        direction={"row"}
+        paddingSize={"s"}
+        restrictWidth={false}>
+        <EuiFlexGroup direction="column" gutterSize={"none"}>
+            <EuiFlexItem>
+                <DataTable
+                    columns={columns}
+                    dataRows={geographies}
+                    renderContext={theRtif}
+                    initialSort={[
+                        {id: "locationName", direction: "asc"},
+                    ]}
+                />
+            </EuiFlexItem>
+        </EuiFlexGroup>
+    </EuiPageTemplate>;
 }
 
 export default GeographyViewer;

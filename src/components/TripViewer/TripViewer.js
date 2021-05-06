@@ -1,6 +1,6 @@
 import React, {useMemo} from "react";
-import {Col, Row} from "react-bootstrap";
 import DataTable from "../DataTable";
+import {EuiFlexGroup, EuiFlexItem, EuiPageTemplate} from "@elastic/eui";
 
 const columns = [
     {
@@ -119,8 +119,13 @@ const columns = [
 function TripViewer({rtif: theRtif}) {
     const trips = useMemo(() => Array.from(theRtif.get("trip").values()), [theRtif]);
 
-    return <Row className={"flex-grow-1 h-100 mh-100"}>
-        <Col className={"h-100 mh-100"}>
+    return <EuiPageTemplate
+        grow={true}
+        direction={"row"}
+        paddingSize={"s"}
+        restrictWidth={false}>
+        <EuiFlexGroup direction="column" gutterSize={"none"}>
+            <EuiFlexItem>
             <DataTable
                 columns={columns}
                 dataRows={trips}
@@ -129,8 +134,9 @@ function TripViewer({rtif: theRtif}) {
                     {id: "originTime", direction: "asc"},
                 ]}
             />
-        </Col>
-    </Row>;
+            </EuiFlexItem>
+        </EuiFlexGroup>
+    </EuiPageTemplate>;
 }
 
 export default TripViewer;

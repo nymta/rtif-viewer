@@ -1,7 +1,7 @@
 import React, {useMemo} from "react";
-import {Col, Row} from "react-bootstrap";
 import {useParams} from "react-router-dom";
 import DataTable from "../DataTable";
+import {EuiFlexGroup, EuiFlexItem, EuiPageTemplate} from "@elastic/eui";
 
 const columns = [
     {
@@ -41,25 +41,28 @@ function TripStopsViewer({rtif: theRtif}) {
     const theTrip = theRtif.get("trip").get(tripName);
     const tripStops = useMemo(() => theTrip.get("event"), [theTrip]);
 
-    return <div className={"mh-100 h-100 d-flex flex-column"}>
-        <Row className={"flex-shrink-0"}>
-            <Col>
-                <h3>Trip {theTrip.get("tripName")}</h3>
-            </Col>
-        </Row>
-        <Row className={"flex-grow-1 h-100 mh-100"}>
-            <Col className={"h-100 mh-100"}>
+    return <EuiPageTemplate
+        grow={true}
+        direction={"row"}
+        paddingSize={"s"}
+        restrictWidth={false}
+        pageHeader={{
+            iconType: "calendar",
+            pageTitle: "Trip " + theTrip.get("tripName"),
+        }}>
+        <EuiFlexGroup direction="column" gutterSize={"none"}>
+            <EuiFlexItem>
                 <DataTable
                     columns={columns}
                     dataRows={tripStops}
                     renderContext={theRtif}
                     initialSort={[
-                        {id: 'eventTime', direction: 'asc'}
+                        {id: "eventTime", direction: "asc"},
                     ]}
                 />
-            </Col>
-        </Row>
-    </div>;
+            </EuiFlexItem>
+        </EuiFlexGroup>
+    </EuiPageTemplate>;
 }
 
 export default TripStopsViewer;
