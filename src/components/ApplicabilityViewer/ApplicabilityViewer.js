@@ -36,7 +36,7 @@ function ApplicabilityViewer({ rtif: theRtif }) {
 
   return (
     <EuiPageTemplate
-      grow={true}
+      grow={!applicability.get("allDay")}
       direction={"row"}
       paddingSize={"s"}
       restrictWidth={applicability.get("allDay")}
