@@ -1,41 +1,111 @@
 import { formatTimetableName } from "../../parser";
 import { DateTime } from "luxon";
 import React from "react";
-import { EuiCard, EuiText, EuiTitle } from "@elastic/eui";
+import {
+  EuiCard,
+  EuiEmptyPrompt,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiIcon,
+  EuiPanel,
+  EuiStat,
+} from "@elastic/eui";
+import RtifStat from "./RtifStat";
 
 function LeftCard({ rtif: theRtif }) {
   return (
-    <EuiCard title={"Timetable Information"}>
+    <EuiCard title={"Timetable Information"} padding={"l"} display="subdued">
       {!theRtif.has("timetable") ? (
-        <>
-          <EuiTitle className={"eui-textLeft"} size={"xs"}>
-            <h2>No timetable loaded</h2>
-          </EuiTitle>
-          <EuiText textAlign={"left"}>
-            Please select a timetable to view.
-          </EuiText>
-        </>
+        <EuiPanel>
+          <EuiEmptyPrompt
+            title={<h2>No timetable loaded</h2>}
+            body={<p>Please select a timetable to view.</p>}
+          />
+        </EuiPanel>
       ) : (
         <>
-          <EuiTitle className={"eui-textLeft"} size={"xs"}>
-            <h2>Timetable {formatTimetableName(theRtif.get("timetable"))}</h2>
-          </EuiTitle>
-          <EuiText textAlign={"left"}>
-            RTIF version {theRtif.get("timetable").get("rtifVersionNumber")}
-            <br />
-            Generated{" "}
-            {DateTime.fromFormat(
-              theRtif.get("timetable").get("generationDate"),
-              "yyyyMMdd"
-            ).toLocaleString(DateTime.DATE_HUGE)}
-            <br />
-            {theRtif.get("geography").size} geographies
-            <br />
-            {theRtif.get("applicability").get("periods").length} applicability
-            periods
-            <br />
-            {theRtif.get("trip").size} trips
-          </EuiText>
+          <EuiFlexGroup direction={"row"} wrap>
+            <EuiFlexItem className={"rtifStat"}>
+              <EuiPanel>
+                <EuiStat
+                  title={formatTimetableName(theRtif.get("timetable"))}
+                  description="Timetable"
+                  titleSize={"s"}
+                  textAlign="left"
+                >
+                  <EuiIcon type="empty" />
+                </EuiStat>
+              </EuiPanel>
+            </EuiFlexItem>
+
+            <EuiFlexItem className={"rtifStat"}>
+              <EuiPanel>
+                <EuiStat
+                  title={DateTime.fromFormat(
+                    theRtif.get("timetable").get("generationDate"),
+                    "yyyyMMdd"
+                  ).toLocaleString(DateTime.DATE_HUGE)}
+                  description="Generation date"
+                  titleSize={"xs"}
+                  textAlign="left"
+                >
+                  <EuiIcon type="empty" />
+                </EuiStat>
+              </EuiPanel>
+            </EuiFlexItem>
+
+            <EuiFlexItem className={"rtifStat"}>
+              <EuiPanel>
+                <EuiStat
+                  title={theRtif.get("timetable").get("rtifVersionNumber")}
+                  description="RTIF version"
+                  textAlign="left"
+                >
+                  <EuiIcon type="empty" />
+                </EuiStat>
+              </EuiPanel>
+            </EuiFlexItem>
+
+            <RtifStat
+              description={"Geographies"}
+              countedValue={theRtif.get("geography").size}
+              controlValue={theRtif.get("control").get("geographyControl")}
+            />
+
+            <RtifStat
+              description={"Applicabilities"}
+              countedValue={
+                theRtif.get("applicability").get("allDay")
+                  ? 1
+                  : theRtif.get("applicability").get("periods").length
+              }
+              controlValue={theRtif.get("control").get("applicabilityControl")}
+            />
+
+            <RtifStat
+              description={"Trips"}
+              countedValue={theRtif.get("trip").size}
+              controlValue={theRtif.get("control").get("tripControl")}
+            />
+
+            <RtifStat
+              description={"Revenue Trips"}
+              countedValue={
+                Array.from(theRtif.get("trip").values()).filter(
+                  (theTrip) => theTrip.get("tripType") === 1
+                ).length
+              }
+              controlValue={theRtif.get("control").get("revenueTripControl")}
+            />
+
+            <RtifStat
+              description={"Events"}
+              countedValue={Array.from(theRtif.get("trip").values())
+                .map((theTrip) => theTrip.get("event").length)
+                .reduce((x, y) => x + y, 0)}
+              controlValue={theRtif.get("control").get("eventControl")}
+            />
+          </EuiFlexGroup>
         </>
       )}
     </EuiCard>

@@ -7,9 +7,7 @@
   - Click on line -> detail view?
 
 - Timetable view
-
-- Validation of control layer counts
-
+  
 - TypeScript?
 
 - Better line reader

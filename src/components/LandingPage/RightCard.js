@@ -31,7 +31,7 @@ function RightCard({ rtif: theRtif, setRtif }) {
   }
 
   return (
-    <EuiCard title={"Load Timetable"} padding={"l"}>
+    <EuiCard title={"Load Timetable"} padding={"l"} display="subdued">
       <EuiForm className={"eui-textLeft"} component="form" onSubmit={onSubmit}>
         <EuiFormRow label="RTIF file">
           <EuiFilePicker required name={"rtifFile"} ref={filePickerRef} />
