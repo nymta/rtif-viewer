@@ -11,6 +11,7 @@ import {
   EuiStat,
 } from "@elastic/eui";
 import RtifStat from "./RtifStat";
+import insertString from "@pelevesque/insert-string";
 
 function LeftCard({ rtif: theRtif }) {
   return (
@@ -44,9 +45,9 @@ function LeftCard({ rtif: theRtif }) {
                   title={DateTime.fromFormat(
                     theRtif.get("timetable").get("generationDate"),
                     "yyyyMMdd"
-                  ).toLocaleString(DateTime.DATE_HUGE)}
+                  ).toLocaleString(DateTime.DATE_FULL)}
                   description="Generation date"
-                  titleSize={"xs"}
+                  titleSize={"s"}
                   textAlign="left"
                 >
                   <EuiIcon type="empty" />
@@ -57,7 +58,7 @@ function LeftCard({ rtif: theRtif }) {
             <EuiFlexItem className={"rtifStat"}>
               <EuiPanel>
                 <EuiStat
-                  title={theRtif.get("timetable").get("rtifVersionNumber")}
+                  title={insertString(theRtif.get("timetable").get("rtifVersionNumber"), ".", 1)}
                   description="RTIF version"
                   textAlign="left"
                 >
