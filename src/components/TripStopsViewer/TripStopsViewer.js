@@ -1,7 +1,9 @@
 import React, { useMemo } from "react";
-import { useParams } from "react-router-dom";
-import DataTable from "../DataTable";
+
 import { EuiFlexGroup, EuiFlexItem, EuiPageTemplate } from "@elastic/eui";
+import { useParams } from "react-router-dom";
+
+import DataTable from "../DataTable";
 
 const columns = [
   {

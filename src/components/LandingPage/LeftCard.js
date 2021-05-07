@@ -1,6 +1,5 @@
-import { formatTimetableName } from "../../parser";
-import { DateTime } from "luxon";
 import React from "react";
+
 import {
   EuiCard,
   EuiEmptyPrompt,
@@ -10,8 +9,11 @@ import {
   EuiPanel,
   EuiStat,
 } from "@elastic/eui";
-import RtifStat from "./RtifStat";
+import { DateTime } from "luxon";
 import insertString from "@pelevesque/insert-string";
+
+import { formatTimetableName } from "../../parser";
+import RtifStat from "./RtifStat";
 
 function LeftCard({ rtif: theRtif }) {
   return (
@@ -58,7 +60,11 @@ function LeftCard({ rtif: theRtif }) {
             <EuiFlexItem className={"rtifStat"}>
               <EuiPanel>
                 <EuiStat
-                  title={insertString(theRtif.get("timetable").get("rtifVersionNumber"), ".", 1)}
+                  title={insertString(
+                    theRtif.get("timetable").get("rtifVersionNumber"),
+                    ".",
+                    1
+                  )}
                   description="RTIF version"
                   textAlign="left"
                 >

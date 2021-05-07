@@ -1,11 +1,17 @@
 import React from "react";
-import Plot from "react-plotly.js";
-import { buildSortedStopList } from "../../stopGraph";
-import _ from "lodash";
-import Plotly from "plotly.js/dist/plotly";
-import { formatLocation, formatTime, formatTimetableName } from "../../parser";
-import { routeColors } from "../../parser/constants";
+
 import { EuiFlexGroup, EuiFlexItem, EuiPageTemplate } from "@elastic/eui";
+import Plotly from "plotly.js/dist/plotly";
+import Plot from "react-plotly.js";
+import _ from "lodash";
+
+import {
+  formatLocation,
+  formatTime,
+  formatTimetableName,
+  routeColors,
+} from "../../parser";
+import { buildSortedStopList } from "../../stopGraph";
 
 //This is awful and ugly and also unavoidable: https://github.com/plotly/plotly.js/issues/1464
 const pristineLocale = Plotly.d3.locale;

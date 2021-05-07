@@ -1,9 +1,11 @@
 import React from "react";
-import CytoscapeComponent from "react-cytoscapejs/src/component";
-import CytoscapeDagre from "cytoscape-dagre";
-import Cytoscape from "cytoscape";
-import { buildStopGraph } from "../../stopGraph";
+
 import { EuiFlexGroup, EuiFlexItem, EuiPageTemplate } from "@elastic/eui";
+import Cytoscape from "cytoscape";
+import CytoscapeDagre from "cytoscape-dagre";
+import CytoscapeComponent from "react-cytoscapejs/src/component";
+
+import { buildStopGraph } from "../../stopGraph";
 
 Cytoscape.use(CytoscapeDagre);
 

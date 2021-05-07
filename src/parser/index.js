@@ -1,15 +1,16 @@
 import parseRtif from "./parser";
 import {
-  formatTimetableName,
-  formatTime,
-  formatLocation,
-  formatDirection,
-  formatTripType,
-  formatEventType,
-  formatTimepointFlag,
   formatCrewing,
+  formatDirection,
+  formatEventType,
+  formatLocation,
   formatStopFlag,
+  formatTime,
+  formatTimepointFlag,
+  formatTimetableName,
+  formatTripType,
 } from "./utils";
+import { routeColors } from "./constants";
 
 export {
   parseRtif,
@@ -22,4 +23,5 @@ export {
   formatTimepointFlag,
   formatCrewing,
   formatStopFlag,
+  routeColors,
 };

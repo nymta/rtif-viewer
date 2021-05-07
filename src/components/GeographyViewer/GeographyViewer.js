@@ -1,6 +1,8 @@
 import React from "react";
-import DataTable from "../DataTable";
+
 import { EuiFlexGroup, EuiFlexItem, EuiPageTemplate } from "@elastic/eui";
+
+import DataTable from "../DataTable";
 
 const columns = [
   {

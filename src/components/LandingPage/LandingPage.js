@@ -1,8 +1,11 @@
 import React from "react";
+
+import { EuiFlexGroup, EuiFlexItem, EuiPageTemplate } from "@elastic/eui";
+
 import LeftCard from "./LeftCard";
 import RightCard from "./RightCard";
+
 import "./LandingPage.css";
-import { EuiFlexGroup, EuiFlexItem, EuiPageTemplate } from "@elastic/eui";
 
 function LandingPage({ rtif: theRtif, setRtif }) {
   return (

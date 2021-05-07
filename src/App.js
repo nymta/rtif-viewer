@@ -1,6 +1,14 @@
-import "./App.scss";
-import { Redirect, Route, Switch } from "react-router-dom";
 import React, { useState } from "react";
+
+import {
+  EuiErrorBoundary,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiSpacer,
+} from "@elastic/eui";
+
+import { Redirect, Route, Switch } from "react-router-dom";
+
 import {
   ApplicabilityViewer,
   AppNavigation,
@@ -12,12 +20,8 @@ import {
   TripStopsViewer,
   TripViewer,
 } from "./components";
-import {
-  EuiErrorBoundary,
-  EuiFlexGroup,
-  EuiFlexItem,
-  EuiSpacer,
-} from "@elastic/eui";
+
+import "./App.scss";
 
 function App() {
   const [rtif, setRtif] = useState(new Map());

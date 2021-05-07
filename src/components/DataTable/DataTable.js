@@ -1,7 +1,9 @@
 import React, { useMemo, useState } from "react";
+
 import { EuiDataGrid } from "@elastic/eui";
-import { schemaDetectorsByType } from "./schemas";
 import _ from "lodash";
+
+import { schemaDetectorsByType } from "./schemas";
 
 function doSort(data, columnsById, sortOrder, renderContext) {
   return [...data].sort((a, b) => {

@@ -1,7 +1,7 @@
 import Cytoscape from "cytoscape";
 
-import buildStopGraph from "./stopGraph";
 import topoSort from "../topoSort";
+import buildStopGraph from "./stopGraph";
 
 Cytoscape.use(topoSort);
 

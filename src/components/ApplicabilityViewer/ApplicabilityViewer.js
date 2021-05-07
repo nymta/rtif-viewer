@@ -1,5 +1,5 @@
 import React from "react";
-import DataTable from "../DataTable";
+
 import {
   EuiEmptyPrompt,
   EuiFlexGroup,
@@ -7,6 +7,8 @@ import {
   EuiPageTemplate,
   EuiPanel,
 } from "@elastic/eui";
+
+import DataTable from "../DataTable";
 
 const columns = [
   {

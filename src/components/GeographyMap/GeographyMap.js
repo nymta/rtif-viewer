@@ -1,13 +1,16 @@
 import React from "react";
+
+import { EuiFlexGroup, EuiFlexItem, EuiPageTemplate } from "@elastic/eui";
+import L from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import proj4 from "proj4";
-import L from "leaflet";
+
 import "leaflet/dist/leaflet.css";
 import "./GeographyMap.css";
+
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerIconRetina from "leaflet/dist/images/marker-icon-2x.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import { EuiFlexGroup, EuiFlexItem, EuiPageTemplate } from "@elastic/eui";
 
 proj4.defs(
   "EPSG:32015",

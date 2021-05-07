@@ -1,3 +1,5 @@
+import React from "react";
+
 import { schemaDetectors as defaultSchemaDetectors } from "@elastic/eui/es/components/datagrid/data_grid_schema";
 import { Link } from "react-router-dom";
 

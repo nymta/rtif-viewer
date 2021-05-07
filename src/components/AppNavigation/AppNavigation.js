@@ -1,10 +1,12 @@
 import React from "react";
+
 import {
   EuiHeader,
   EuiHeaderLink,
   EuiHeaderLinks,
   EuiHeaderLogo,
 } from "@elastic/eui";
+
 import LinkContainer from "../../LinkContainer";
 
 function AppNavigation({ isLoaded }) {

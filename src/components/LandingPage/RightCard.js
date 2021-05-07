@@ -1,6 +1,5 @@
-import { parseRtif } from "../../parser";
 import React from "react";
-import { readAsText } from "promise-file-reader";
+
 import {
   EuiButton,
   EuiCard,
@@ -9,6 +8,9 @@ import {
   EuiFormRow,
   EuiSpacer,
 } from "@elastic/eui";
+import { readAsText } from "promise-file-reader";
+
+import { parseRtif } from "../../parser";
 
 function RightCard({ rtif: theRtif, setRtif }) {
   const filePickerRef = React.createRef();
