@@ -3,8 +3,9 @@ import AppNavigation from "./AppNavigation";
 import GeographyMap from "./GeographyMap";
 import GeographyViewer from "./GeographyViewer";
 import LandingPage from "./LandingPage";
-import MareyDiagram from "./MareyDiagram";
-import StopGraph from "./StopGraph";
+import Loading from "./Loading";
+//import MareyDiagram from "./MareyDiagram";
+//import StopGraph from "./StopGraph";
 import TripStopsViewer from "./TripStopsViewer";
 import TripViewer from "./TripViewer";
 
@@ -14,8 +15,9 @@ export {
   GeographyMap,
   GeographyViewer,
   LandingPage,
-  MareyDiagram,
-  StopGraph,
+  Loading,
+  //  MareyDiagram,
+  //  StopGraph,
   TripStopsViewer,
   TripViewer,
 };

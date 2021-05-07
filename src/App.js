@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState, lazy } from "react";
 
 import {
   EuiErrorBoundary,
@@ -6,7 +6,6 @@ import {
   EuiFlexItem,
   EuiSpacer,
 } from "@elastic/eui";
-
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import {
@@ -14,14 +13,15 @@ import {
   AppNavigation,
   GeographyMap,
   GeographyViewer,
-  LandingPage,
-  MareyDiagram,
-  StopGraph,
+  LandingPage, Loading,
   TripStopsViewer,
-  TripViewer,
+  TripViewer
 } from "./components";
 
 import "./App.scss";
+
+const StopGraph = lazy(() => import("./components/StopGraph"));
+const MareyDiagram = lazy(() => import("./components/MareyDiagram"));
 
 function App() {
   const [rtif, setRtif] = useState(new Map());
@@ -36,70 +36,72 @@ function App() {
       </EuiFlexItem>
       <EuiFlexItem>
         <EuiErrorBoundary>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={(routeProps) => (
-                <LandingPage rtif={rtif} setRtif={setRtif} {...routeProps} />
+          <Suspense fallback={<Loading />}>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={(routeProps) => (
+                  <LandingPage rtif={rtif} setRtif={setRtif} {...routeProps} />
+                )}
+              />
+              {isLoaded && (
+                <>
+                  <Route
+                    exact
+                    path="/view/applicabilities"
+                    render={(routeProps) => (
+                      <ApplicabilityViewer rtif={rtif} {...routeProps} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/view/geographies/table"
+                    render={(routeProps) => (
+                      <GeographyViewer rtif={rtif} {...routeProps} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/view/geographies/map"
+                    render={(routeProps) => (
+                      <GeographyMap rtif={rtif} {...routeProps} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/view/trips"
+                    render={(routeProps) => (
+                      <TripViewer rtif={rtif} {...routeProps} />
+                    )}
+                  />
+                  <Route
+                    path="/view/trips/:tripName"
+                    render={(routeProps) => (
+                      <TripStopsViewer rtif={rtif} {...routeProps} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/view/stopGraph"
+                    render={(routeProps) => (
+                      <StopGraph rtif={rtif} {...routeProps} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/view/mareyDiagram"
+                    render={(routeProps) => (
+                      <MareyDiagram rtif={rtif} {...routeProps} />
+                    )}
+                  />
+                </>
               )}
-            />
-            {isLoaded && (
-              <>
-                <Route
-                  exact
-                  path="/view/applicabilities"
-                  render={(routeProps) => (
-                    <ApplicabilityViewer rtif={rtif} {...routeProps} />
-                  )}
-                />
-                <Route
-                  exact
-                  path="/view/geographies/table"
-                  render={(routeProps) => (
-                    <GeographyViewer rtif={rtif} {...routeProps} />
-                  )}
-                />
-                <Route
-                  exact
-                  path="/view/geographies/map"
-                  render={(routeProps) => (
-                    <GeographyMap rtif={rtif} {...routeProps} />
-                  )}
-                />
-                <Route
-                  exact
-                  path="/view/trips"
-                  render={(routeProps) => (
-                    <TripViewer rtif={rtif} {...routeProps} />
-                  )}
-                />
-                <Route
-                  path="/view/trips/:tripName"
-                  render={(routeProps) => (
-                    <TripStopsViewer rtif={rtif} {...routeProps} />
-                  )}
-                />
-                <Route
-                  exact
-                  path="/view/stopGraph"
-                  render={(routeProps) => (
-                    <StopGraph rtif={rtif} {...routeProps} />
-                  )}
-                />
-                <Route
-                  exact
-                  path="/view/mareyDiagram"
-                  render={(routeProps) => (
-                    <MareyDiagram rtif={rtif} {...routeProps} />
-                  )}
-                />
-              </>
-            )}
-            <Route>
-              <Redirect to="/" />
-            </Route>
-          </Switch>
+              <Route>
+                <Redirect to="/" />
+              </Route>
+            </Switch>
+          </Suspense>
         </EuiErrorBoundary>
       </EuiFlexItem>
     </EuiFlexGroup>
