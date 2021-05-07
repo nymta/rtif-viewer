@@ -51,6 +51,7 @@ function TripStopsViewer({ rtif: theRtif }) {
         iconType: "calendar",
         pageTitle: "Trip " + theTrip.get("tripName"),
       }}
+      style={{ overflow: "hidden" }}
     >
       <EuiFlexGroup direction="column" gutterSize={"none"}>
         <EuiFlexItem>
