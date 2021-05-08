@@ -13,9 +13,10 @@ import {
   AppNavigation,
   GeographyMap,
   GeographyViewer,
-  LandingPage, Loading,
+  LandingPage,
+  Loading,
   TripStopsViewer,
-  TripViewer
+  TripViewer,
 } from "./components";
 
 import "./App.scss";

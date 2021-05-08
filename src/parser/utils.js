@@ -13,7 +13,10 @@ export function formatTimetableName(timetable) {
   const lineIdentifier = timetable.get("lineIdentifier");
   const serviceCode = timetable.get("serviceCode").toString();
   const fileNumber = timetable.get("fileNumber").toString().padStart(3, "0");
-  const supplementNumber = timetable.get("supplementNumber").toString().padStart(3, "0");
+  const supplementNumber = timetable
+    .get("supplementNumber")
+    .toString()
+    .padStart(3, "0");
 
   return `${lineIdentifier}-${serviceCode}${fileNumber} S-${supplementNumber}`;
 }
