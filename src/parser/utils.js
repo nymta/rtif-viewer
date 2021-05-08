@@ -10,20 +10,17 @@ import {
 } from "./constants";
 
 export function formatTimetableName(timetable) {
-  return `${timetable.get("lineIdentifier")}-${timetable
-    .get("serviceCode")
-    .toString()}${timetable
-    .get("fileNumber")
-    .toString()
-    .padStart(3, "0")} S-${timetable
-    .get("supplementNumber")
-    .toString()
-    .padStart(3, "0")}`;
+  const lineIdentifier = timetable.get("lineIdentifier");
+  const serviceCode = timetable.get("serviceCode").toString();
+  const fileNumber = timetable.get("fileNumber").toString().padStart(3, "0");
+  const supplementNumber = timetable.get("supplementNumber").toString().padStart(3, "0");
+
+  return `${lineIdentifier}-${serviceCode}${fileNumber} S-${supplementNumber}`;
 }
 
 function formatLocationAbbreviation(location, tripType) {
   if (!!location) {
-    return rtifLocationtoAtsAbbreviation.get(location);
+    return rtifLocationtoAtsAbbreviation.get(location) || location;
   } else {
     switch (tripType) {
       case 2:
