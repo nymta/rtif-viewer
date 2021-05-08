@@ -10,7 +10,7 @@ import {
   EuiStat,
 } from "@elastic/eui";
 import { DateTime } from "luxon";
-import insertString from "@pelevesque/insert-string";
+import spliceString from "splice-string";
 
 import { formatTimetableName } from "../../parser";
 import RtifStat from "./RtifStat";
@@ -60,10 +60,11 @@ function LeftCard({ rtif: theRtif }) {
             <EuiFlexItem className={"rtifStat"}>
               <EuiPanel>
                 <EuiStat
-                  title={insertString(
+                  title={spliceString(
                     theRtif.get("timetable").get("rtifVersionNumber"),
-                    ".",
-                    1
+                    1,
+                    0,
+                    "."
                   )}
                   description="RTIF version"
                   textAlign="left"
