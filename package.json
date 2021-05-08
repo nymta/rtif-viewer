@@ -9,7 +9,7 @@
     "@pelevesque/insert-string": "^0.0.6",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@testing-library/user-event": "^13.1.8",
     "csv-loader": "^3.0.3",
     "cytoscape": "^3.18.2",
     "cytoscape-dagre": "^2.3.2",
