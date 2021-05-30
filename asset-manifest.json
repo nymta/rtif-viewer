@@ -1,7 +1,7 @@
 {
   "files": {
-    "static/js/0.90e7542b.chunk.js": "/rtif-viewer/static/js/0.90e7542b.chunk.js",
-    "static/js/0.90e7542b.chunk.js.map": "/rtif-viewer/static/js/0.90e7542b.chunk.js.map",
+    "static/js/0.9842909d.chunk.js": "/rtif-viewer/static/js/0.9842909d.chunk.js",
+    "static/js/0.9842909d.chunk.js.map": "/rtif-viewer/static/js/0.9842909d.chunk.js.map",
     "icon.accessibility-js.js": "/rtif-viewer/static/js/icon.accessibility-js.95ca2c1c.chunk.js",
     "icon.accessibility-js.js.map": "/rtif-viewer/static/js/icon.accessibility-js.95ca2c1c.chunk.js.map",
     "icon.aggregate-js.js": "/rtif-viewer/static/js/icon.aggregate-js.708f7450.chunk.js",
@@ -817,8 +817,8 @@
     "main.css": "/rtif-viewer/static/css/main.6e4d57d2.chunk.css",
     "main.js": "/rtif-viewer/static/js/main.a98f5640.chunk.js",
     "main.js.map": "/rtif-viewer/static/js/main.a98f5640.chunk.js.map",
-    "runtime-main.js": "/rtif-viewer/static/js/runtime-main.bcc40b0d.js",
-    "runtime-main.js.map": "/rtif-viewer/static/js/runtime-main.bcc40b0d.js.map",
+    "runtime-main.js": "/rtif-viewer/static/js/runtime-main.a21e44a6.js",
+    "runtime-main.js.map": "/rtif-viewer/static/js/runtime-main.a21e44a6.js.map",
     "static/css/409.afa8aac7.chunk.css": "/rtif-viewer/static/css/409.afa8aac7.chunk.css",
     "static/js/409.a396fc62.chunk.js": "/rtif-viewer/static/js/409.a396fc62.chunk.js",
     "static/js/409.a396fc62.chunk.js.map": "/rtif-viewer/static/js/409.a396fc62.chunk.js.map",
@@ -835,12 +835,12 @@
     "index.html": "/rtif-viewer/index.html",
     "static/css/409.afa8aac7.chunk.css.map": "/rtif-viewer/static/css/409.afa8aac7.chunk.css.map",
     "static/css/main.6e4d57d2.chunk.css.map": "/rtif-viewer/static/css/main.6e4d57d2.chunk.css.map",
-    "static/js/0.90e7542b.chunk.js.LICENSE.txt": "/rtif-viewer/static/js/0.90e7542b.chunk.js.LICENSE.txt",
+    "static/js/0.9842909d.chunk.js.LICENSE.txt": "/rtif-viewer/static/js/0.9842909d.chunk.js.LICENSE.txt",
     "static/js/409.a396fc62.chunk.js.LICENSE.txt": "/rtif-viewer/static/js/409.a396fc62.chunk.js.LICENSE.txt",
     "static/js/411.8adb8e0a.chunk.js.LICENSE.txt": "/rtif-viewer/static/js/411.8adb8e0a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.bcc40b0d.js",
+    "static/js/runtime-main.a21e44a6.js",
     "static/css/409.afa8aac7.chunk.css",
     "static/js/409.a396fc62.chunk.js",
     "static/css/main.6e4d57d2.chunk.css",
