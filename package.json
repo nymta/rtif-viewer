@@ -32,7 +32,7 @@
     "source-map-explorer": "^2.5.2",
     "splice-string": "^3.0.0",
     "toposort": "^2.0.2",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^2.0.1"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
