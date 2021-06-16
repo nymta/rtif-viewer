@@ -1177,10 +1177,10 @@
   dependencies:
     tslib "^1.9.3"
 
-"@elastic/eui@^34.2.0":
-  version "34.2.0"
-  resolved "https://registry.yarnpkg.com/@elastic/eui/-/eui-34.2.0.tgz#debc28eb8f39121cdcd03bf8523149117254e9ce"
-  integrity sha512-Xy/oMWxi75jMwCfLPG34zpmsTULjyXdFBLSIzq5u6DmdyEJsV2+ewAxJnmawCZN5BhGD5gVZUcjGvqRDSRGk6Q==
+"@elastic/eui@^34.4.0":
+  version "34.4.0"
+  resolved "https://registry.yarnpkg.com/@elastic/eui/-/eui-34.4.0.tgz#3991da71b59389792eb823176a76eb8b7fc78fda"
+  integrity sha512-vSFO2iY9IfOaBWyyVhXuv6xKqruRktCv01t+MefleeUB/X6O1XTP9RukmDfBqDsvXG8pNCafoakVqPVrpjbmeQ==
   dependencies:
     "@types/chroma-js" "^2.0.0"
     "@types/lodash" "^4.14.160"
