@@ -1177,10 +1177,10 @@
   dependencies:
     tslib "^1.9.3"
 
-"@elastic/eui@^34.2.0":
-  version "34.2.0"
-  resolved "https://registry.yarnpkg.com/@elastic/eui/-/eui-34.2.0.tgz#debc28eb8f39121cdcd03bf8523149117254e9ce"
-  integrity sha512-Xy/oMWxi75jMwCfLPG34zpmsTULjyXdFBLSIzq5u6DmdyEJsV2+ewAxJnmawCZN5BhGD5gVZUcjGvqRDSRGk6Q==
+"@elastic/eui@^34.5.0":
+  version "34.5.0"
+  resolved "https://registry.yarnpkg.com/@elastic/eui/-/eui-34.5.0.tgz#951ff0f619907cf4a6c8b9680a007e419614b1e1"
+  integrity sha512-JdSwNud/We4UimtqXqrk0+1YLJuQPVz0nw/zF/QQs7I0PrFbMox7HBsAIN6k06M+Jv9QuSlTFwS4K51NGufCNg==
   dependencies:
     "@types/chroma-js" "^2.0.0"
     "@types/lodash" "^4.14.160"
@@ -1216,6 +1216,7 @@
     tabbable "^3.0.0"
     text-diff "^1.0.1"
     unified "^9.2.0"
+    unist-util-visit "^2.0.3"
     url-parse "^1.5.0"
     uuid "^8.3.0"
     vfile "^4.2.0"
