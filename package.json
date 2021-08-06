@@ -5,7 +5,7 @@
   "homepage": "/rtif-viewer",
   "dependencies": {
     "@elastic/datemath": "^5.0.3",
-    "@elastic/eui": "^34.2.0",
+    "@elastic/eui": "^37.0.0",
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^13.1.9",
