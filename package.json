@@ -16,7 +16,7 @@
     "lodash": "^4.17.21",
     "luxon": "^1.27.0",
     "moment": "^2.29.1",
-    "plotly.js": "^1.58.4",
+    "plotly.js": "^2.4.2",
     "proj4": "^2.7.2",
     "promise-file-reader": "^1.0.3",
     "react": "^17.0.2",
