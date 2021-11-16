@@ -17,7 +17,7 @@
     "luxon": "^1.27.0",
     "moment": "^2.29.1",
     "plotly.js": "^1.58.4",
-    "proj4": "^2.7.2",
+    "proj4": "^2.7.5",
     "promise-file-reader": "^1.0.3",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
@@ -60,6 +60,6 @@
     ]
   },
   "devDependencies": {
-    "prettier": "2.3.0"
+    "prettier": "2.4.1"
   }
 }
