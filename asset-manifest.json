@@ -849,8 +849,8 @@
     "icon.wrench-js.js": "/rtif-viewer/static/js/icon.wrench-js.8833bdd2.chunk.js",
     "icon.wrench-js.js.map": "/rtif-viewer/static/js/icon.wrench-js.8833bdd2.chunk.js.map",
     "main.css": "/rtif-viewer/static/css/main.6e4d57d2.chunk.css",
-    "main.js": "/rtif-viewer/static/js/main.1f7c6368.chunk.js",
-    "main.js.map": "/rtif-viewer/static/js/main.1f7c6368.chunk.js.map",
+    "main.js": "/rtif-viewer/static/js/main.d32acd61.chunk.js",
+    "main.js.map": "/rtif-viewer/static/js/main.d32acd61.chunk.js.map",
     "runtime-main.js": "/rtif-viewer/static/js/runtime-main.5b403d7e.js",
     "runtime-main.js.map": "/rtif-viewer/static/js/runtime-main.5b403d7e.js.map",
     "static/css/426.818b87e0.chunk.css": "/rtif-viewer/static/css/426.818b87e0.chunk.css",
@@ -878,6 +878,6 @@
     "static/css/426.818b87e0.chunk.css",
     "static/js/426.4d4c7dbf.chunk.js",
     "static/css/main.6e4d57d2.chunk.css",
-    "static/js/main.1f7c6368.chunk.js"
+    "static/js/main.d32acd61.chunk.js"
   ]
 }
