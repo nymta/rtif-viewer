@@ -20,7 +20,7 @@
     "proj4": "^2.7.5",
     "promise-file-reader": "^1.0.3",
     "react": "^17.0.2",
-    "react-app-polyfill": "^2.0.0",
+    "react-app-polyfill": "^3.0.0",
     "react-cytoscapejs": "^1.2.1",
     "react-dom": "^17.0.2",
     "react-leaflet": "^3.2.0",
