@@ -4727,13 +4727,16 @@ cytoscape-dagre@^2.3.2:
   dependencies:
     dagre "^0.8.5"
 
-cytoscape@^3.19.0, cytoscape@^3.2.19:
-  version "3.19.0"
-  resolved "https://registry.yarnpkg.com/cytoscape/-/cytoscape-3.19.0.tgz#b3e3136f823ca00a1c7752741c2a349e52545f57"
-  integrity sha512-DANM8bM4EuSTS3DraPK0nLSmzANrzQ2g/cb3u5Biexu/NVsJA+xAoXVvWHRIHDXz3y0gpMjTPv3Z13ZbkNrEPw==
+cytoscape@^3.2.19, cytoscape@^3.22.0:
+  version "3.22.0"
+  resolved "https://registry.yarnpkg.com/cytoscape/-/cytoscape-3.22.0.tgz#acede24be255ce8ea2a5a6607c46db642f81fa54"
+  integrity sha512-qpucvQMk6ZtBXtXAHnn/1LXfQdsRaVrZlbfwu9bzf/lPW3LAVFhpXCyr3zTbolYkJs4tYPnT9CDHFJD0+Pqa7g==
   dependencies:
     heap "^0.2.6"
     lodash.debounce "^4.0.8"
+    lodash.get "^4.4.2"
+    lodash.set "^4.3.2"
+    lodash.topath "^4.5.2"
 
 d3-array@1, d3-array@^1.2.1:
   version "1.2.4"
@@ -8995,6 +8998,11 @@ lodash.memoize@^4.1.2:
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
 
+lodash.set@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
+  integrity sha512-4hNPN5jlm/N/HLMCO43v8BXKq9Z7QdAGc/VGrRD61w8gN9g/6jF9A4L1pbUgBLCffi0w9VsXfTOij5x8iTyFvg==
+
 lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
@@ -9019,6 +9027,11 @@ lodash.toarray@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.toarray/-/lodash.toarray-4.4.0.tgz#24c4bfcd6b2fba38bfd0594db1179d8e9b656561"
   integrity sha1-JMS/zWsvuji/0FlNsRedjptlZWE=
+
+lodash.topath@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/lodash.topath/-/lodash.topath-4.5.2.tgz#3616351f3bba61994a0931989660bd03254fd009"
+  integrity sha512-1/W4dM+35DwvE/iEd1M9ekewOSTlpFekhw9mhAtrwjVqUr83/ilQiyAvmg4tVX7Unkcfl1KC+i9WdaT4B6aQcg==
 
 lodash.uniq@^4.5.0:
   version "4.5.0"
